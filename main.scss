@@ -1,0 +1,18 @@
+body {
+  box-sizing: content-box;
+}
+
+header {
+  text-align: center;
+}
+.contents {
+  display: flex;
+  margin: 0.5rem;
+}
+.contents > * {
+  width: 50%;
+}
+
+footer {
+  text-align: center;
+}
