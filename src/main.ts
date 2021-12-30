@@ -1,1 +1,2 @@
-console.log('dfdf')
+'use strict'
+

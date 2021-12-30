@@ -1,0 +1,32 @@
+body {
+  box-sizing: content-box;
+  background-color: black;
+  color: red;
+}
+
+button {
+  border: 0rem;
+  background-color: red;
+  padding: 0.3rem;
+  margin: 1rem 0 0 0;
+}
+
+main {
+  height: 100%;
+}
+header {
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+}
+
+.contents {
+  display: flex;
+  margin: 0.5rem;
+}
+.contents > * {
+  width: 50%;
+}
+
+footer {
+  text-align: center;
+}
