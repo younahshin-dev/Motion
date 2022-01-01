@@ -3,43 +3,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="./build/main.js"></script>
+  <title>Motion</title>
+  <script type="module" src="./build/main.js" defer></script>
   <link rel="stylesheet" href="./style/main.css">
 </head>
 <body>
-  <header>
-    <h2>MOTION</h2>
-    <section class="buttonArea">
-      <button id="addImage">Image</button>
-      <button id="addVideo">Video</button>
-      <button id="addNote">Note</button>
-      <button id="addTask">Task</button>
-    </section>
-  </header>
-  <main>
-    <section class="contents">
-      <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
-      <textarea></textarea>
-    </section>
-    <section class="contents">
-      <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
-      <textarea></textarea>
-    </section><section class="contents">
-      <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
-      <textarea></textarea>
-    </section><section class="contents">
-      <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
-      <textarea></textarea>
-      
-    </section>
-    <section class="contents">
-      <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
-      <textarea></textarea>
-    </section>
-  </main>
-  <footer>
-    Created by younah shin
-  </footer>
+  <div class="app">
+    <header>
+      <h2>MOTION</h2>
+        <ul>
+          <li class="createButton"><button onClick='handleClick()' id="addImage">Image</button></li>
+          <li class="createButton"><button onClick='handleClick()' id="addVideo">Video</button></li>
+          <li class="createButton"><button onClick='handleClick()' id="addNote">Note</button></li>
+          <li class="createButton">
+            <button onClick='handleClick()' id="addTask">Task</button></li>
+        </ul>
+    </header>
+    <main>
+      <section class="contents">
+        <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
+        <textarea></textarea>
+      </section>
+      <section class="contents">
+        <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
+        <textarea></textarea>
+      </section><section class="contents">
+        <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
+        <textarea></textarea>
+      </section><section class="contents">
+        <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
+        <textarea></textarea>
+        
+      </section>
+      <section class="contents">
+        <image src="https://pixabay.com/get/gb52a6c6a23e27e8d271f461924f239aac004260d413133aa9830590845e8868d54f12a1c8c54bf3b9db44d64ff223827_1280.jpg"></image>
+        <textarea></textarea>
+      </section>
+    </main>
+    <footer>
+      ©️ Created by younah shin
+    </footer>
+  </div>
 </body>
 </html>

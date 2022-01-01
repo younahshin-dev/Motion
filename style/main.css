@@ -1,30 +1,47 @@
 body {
+  background-image: url(/assets/cool-background.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.app {
+  height: 100%;
+  width: 100%;
   box-sizing: content-box;
-  background-color: black;
-  color: red;
+  color: black;
 }
 
 button {
   border: 0rem;
-  background-color: red;
-  padding: 0.3rem;
+  background-color: white;
+  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
   margin: 1rem 0 0 0;
 }
 
+button:hover {
+  transform: scale(1.2, 1.2);
+}
+
 main {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  padding: 0.2rem;
 }
 header {
   text-align: center;
-  margin: 1rem 0 2rem 0;
 }
 
 .contents {
   display: flex;
-  margin: 0.5rem;
-}
-.contents > * {
-  width: 50%;
 }
 
 footer {
