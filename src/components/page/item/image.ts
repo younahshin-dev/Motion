@@ -1,9 +1,8 @@
-
-export class ImageComponent {
-  private element: HTMLElement;
+import { BaseComponent } from "../../base.js";
+export class ImageComponent extends BaseComponent{
   
   constructor(title:string, url:string) {
-
+    super(title, url);
     const template = document.createElement('template');
     template.innerHTML = `<section class="image">
     <div class="image__holder">
