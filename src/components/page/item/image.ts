@@ -1,17 +1,14 @@
-import { BaseComponent } from "../../base.js";
-export class ImageComponent extends BaseComponent{
+import { BaseComponent } from "../../component.js";
+export class ImageComponent extends BaseComponent<HTMLElement>{
   
-  constructor(title:string, url:string) {
-    super(title, url);
-    const template = document.createElement('template');
-    template.innerHTML = `<section class="image">
-    <div class="image__holder">
-      <img class="image__thumbnail"></img>
-    </div>
-    <p class="image__title"></p>
-  </section>`;
-
-  this.element = template.content.firstElementChild! as HTMLElement;
+  constructor(title: string, url: string) {
+    super(`<section class="image">
+            <div class="image__holder">
+                <img class="image__thumbnail"></img>
+            </div>
+            <p class="image__title"></p>
+          </section>`);
+    
   const imageElement = this.element.querySelector('.image__thumbnail')! as HTMLImageElement;
   imageElement.src = url;
   imageElement.alt = title;
@@ -28,7 +25,5 @@ export class ImageComponent extends BaseComponent{
     // this.element.appendChild(this.textElement);
   }
 
-  attachTo(parent: HTMLElement, position: InsertPosition = 'afterbegin') {
-    parent.appendChild(this.element);
-  }
+  
 }
