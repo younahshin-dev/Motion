@@ -9,7 +9,7 @@ class App {
         this.page.attachTo(appRoot);
         this.image = new ImageComponent('Image Title', 'https://picsum.photos/600/300');
         this.image.attachTo(appRoot, 'beforeend');
-        this.video = new VideoComponent('Video Title', `https://www.youtube.com/embed/l6JoZ2jL6SE`);
+        this.video = new VideoComponent('Video Title', `https://www.youtube.com/watch?v=Ua9NTFRQ1ms&ab_channel=%ED%95%B4%EC%AD%88%5BHAEJOO%5D`);
         this.video.attachTo(appRoot, 'beforeend');
         this.note = new NoteComponent('Note Title', '노트내용');
         this.note.attachTo(appRoot, 'beforeend');
