@@ -84,6 +84,7 @@ body {
 .document {
   height: 100%;
   background-color: var(--document-bg-color);
+  overflow: visible;
   /* Firefox */
   scrollbar-width: 6px;
   scrollbar-color: var(--bg-accent-color);
