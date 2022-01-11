@@ -13,7 +13,7 @@ class App {
   private readonly todo: TodoComponent;
 
   constructor(appRoot: HTMLElement) {
-    this.page = new PageComponent();
+    this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
     this.image = new ImageComponent('Image Title', 'https://picsum.photos/600/300');
