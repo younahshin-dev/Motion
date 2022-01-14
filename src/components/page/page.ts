@@ -42,7 +42,6 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
   
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super(`<ul class="page"></ul>`);
-    
   }
 
   addChild(section:Component) {
