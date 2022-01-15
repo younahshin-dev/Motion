@@ -5,18 +5,18 @@ import { NoteComponent } from './components/page/item/note.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { Component } from './components/component.js';
 import { inputDialog } from './components/dialog/dialog.js';
-import { MediaSection } from './components/dialog/item/mediaSection.js';
+import { MediaSection } from './components/dialog/item/media-section.js';
 class App {
   private readonly page: Component & Composable;
   
-  private readonly image: ImageComponent;
+  // private readonly image: ImageComponent;
   private readonly video: VideoComponent;
   private readonly note: NoteComponent;
   private readonly todo: TodoComponent;
   
-  private readonly mediaSection: MediaSection;
+ //private readonly mediaSection: MediaSection;
 
-  constructor(appRoot: HTMLElement) {
+  constructor(appRoot: HTMLElement, dialogRoot: HTMLElement) {
     this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
@@ -31,31 +31,33 @@ class App {
     this.page.addChild(this.todo);
 
     
-    this.image = new ImageComponent('Image Title', 'https://picsum.photos/600/300');
-    this.page.addChild(this.image);
+    // this.image = new ImageComponent('Image Title', 'https://picsum.photos/600/300');
+    // this.page.addChild(this.image);
 
     const imageButton = document.querySelector("#add-Image") as HTMLButtonElement;
-    this.mediaSection = new MediaSection();
+    //this.mediaSection = new MediaSection();
     
     imageButton.addEventListener('click', () => {
       const dialog = new inputDialog();
-      dialog.addChild(this.mediaSection);
+      const inputSection = new MediaSection();
+      dialog.addChild(inputSection);
+      dialog.attachTo(dialogRoot);
 
       dialog.setOnCloseListener(() => {
-        dialog.removeFrom(document.body);
+        dialog.removeFrom(dialogRoot);
       });
       dialog.setOnSubmitListener (() => {
-        const title = document.querySelector(".image__title") as HTMLInputElement;
-        const url = document.querySelector(".image__url") as HTMLInputElement;
-        this.page.addChild(new ImageComponent(`${title.value}`, `${url.value}`));
-        dialog.removeFrom(document.body);
+
+
+        const image = new ImageComponent(inputSection.title, inputSection.url);
+        this.page.addChild(image);
+        dialog.removeFrom(dialogRoot);
       });
 
-      dialog.attachTo(document.body);
       
     });
     
   }
 }
 
-new App(document.querySelector('.document')! as HTMLElement);
+new App(document.querySelector('.document')! as HTMLElement, document.body);
