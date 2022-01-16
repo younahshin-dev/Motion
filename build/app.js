@@ -11,10 +11,10 @@ class App {
         this.dialogRoot = dialogRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(appRoot);
-        this.bindElementToDialog("#add-Image", MediaSection, (inputSection) => { return new ImageComponent(inputSection.title, inputSection.url); });
-        this.bindElementToDialog("#add-Video", MediaSection, (inputSection) => { return new VideoComponent(inputSection.title, inputSection.url); });
-        this.bindElementToDialog("#add-Note", TextSection, (inputSection) => { return new NoteComponent(inputSection.title, inputSection.body); });
-        this.bindElementToDialog("#add-Task", TextSection, (inputSection) => { return new TodoComponent(inputSection.title, inputSection.body); });
+        this.bindElementToDialog("#add-Image", MediaSection, (inputSection) => new ImageComponent(inputSection.title, inputSection.url));
+        this.bindElementToDialog("#add-Video", MediaSection, (inputSection) => new VideoComponent(inputSection.title, inputSection.url));
+        this.bindElementToDialog("#add-Note", TextSection, (inputSection) => new NoteComponent(inputSection.title, inputSection.body));
+        this.bindElementToDialog("#add-Task", TextSection, (inputSection) => new TodoComponent(inputSection.title, inputSection.body));
     }
     bindElementToDialog(selector, inputComponent, makeSection) {
         const element = document.querySelector(selector);

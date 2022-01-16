@@ -4,11 +4,11 @@ import { Composable, PageComponent, PageItemComponent } from './components/page/
 import { NoteComponent } from './components/page/item/note.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { Component } from './components/component.js';
-import { inputDialog } from './components/dialog/dialog.js';
+import { inputDialog, MediaData, TextData } from './components/dialog/dialog.js';
 import { MediaSection } from './components/dialog/item/media-section.js';
 import { TextSection } from './components/dialog/item/text-section.js';
 
-type InputComponentConstuctor<T = MediaSection | TextSection> = {
+type InputComponentConstuctor<T = (MediaData | TextData) & Component> = {
   new (): T;
 }
 class App {
@@ -19,19 +19,19 @@ class App {
     this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
-    this.bindElementToDialog("#add-Image", MediaSection, (inputSection:MediaSection)=> {return new ImageComponent(inputSection.title, inputSection.url);});
+    this.bindElementToDialog<MediaSection>("#add-Image", MediaSection, (inputSection:MediaSection) => new ImageComponent(inputSection.title, inputSection.url));
    
     
-    this.bindElementToDialog("#add-Video", MediaSection, (inputSection:MediaSection)=> {return new VideoComponent(inputSection.title, inputSection.url);});
+    this.bindElementToDialog<MediaSection>("#add-Video", MediaSection, (inputSection:MediaSection) => new VideoComponent(inputSection.title, inputSection.url));
 
     
-    this.bindElementToDialog("#add-Note", TextSection, (inputSection:TextSection)=> {return new NoteComponent(inputSection.title, inputSection.body);});
+    this.bindElementToDialog<TextSection>("#add-Note", TextSection, (inputSection:TextSection) => new NoteComponent(inputSection.title, inputSection.body));
 
-    this.bindElementToDialog("#add-Task", TextSection, (inputSection:TextSection)=> {return new TodoComponent(inputSection.title, inputSection.body);});
+    this.bindElementToDialog<TextSection>("#add-Task", TextSection, (inputSection:TextSection) => new TodoComponent(inputSection.title, inputSection.body));
     
     
   }
-  private bindElementToDialog<T extends MediaSection | TextSection> 
+  private bindElementToDialog<T extends (MediaData | TextData) & Component> 
     (
       selector: string, 
       inputComponent: InputComponentConstuctor<T>,
