@@ -8,66 +8,28 @@ import { MediaSection } from './components/dialog/item/media-section.js';
 import { TextSection } from './components/dialog/item/text-section.js';
 class App {
     constructor(appRoot, dialogRoot) {
+        this.dialogRoot = dialogRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(appRoot);
-        const imageButton = document.querySelector("#add-Image");
-        imageButton.addEventListener('click', () => {
+        this.bindElementToDialog("#add-Image", MediaSection, (inputSection) => { return new ImageComponent(inputSection.title, inputSection.url); });
+        this.bindElementToDialog("#add-Video", MediaSection, (inputSection) => { return new VideoComponent(inputSection.title, inputSection.url); });
+        this.bindElementToDialog("#add-Note", TextSection, (inputSection) => { return new NoteComponent(inputSection.title, inputSection.body); });
+        this.bindElementToDialog("#add-Task", TextSection, (inputSection) => { return new TodoComponent(inputSection.title, inputSection.body); });
+    }
+    bindElementToDialog(selector, inputComponent, makeSection) {
+        const element = document.querySelector(selector);
+        element.addEventListener('click', () => {
             const dialog = new inputDialog();
-            const inputSection = new MediaSection();
+            const inputSection = new inputComponent();
             dialog.addChild(inputSection);
-            dialog.attachTo(dialogRoot);
+            dialog.attachTo(this.dialogRoot);
             dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
+                dialog.removeFrom(this.dialogRoot);
             });
             dialog.setOnSubmitListener(() => {
-                const image = new ImageComponent(inputSection.title, inputSection.url);
-                this.page.addChild(image);
-                dialog.removeFrom(dialogRoot);
-            });
-        });
-        const videoButton = document.querySelector("#add-Video");
-        videoButton.addEventListener('click', () => {
-            const dialog = new inputDialog();
-            const inputSection = new MediaSection();
-            dialog.addChild(inputSection);
-            dialog.attachTo(dialogRoot);
-            dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
-            });
-            dialog.setOnSubmitListener(() => {
-                const video = new VideoComponent(inputSection.title, inputSection.url);
-                this.page.addChild(video);
-                dialog.removeFrom(dialogRoot);
-            });
-        });
-        const noteButton = document.querySelector("#add-Note");
-        noteButton.addEventListener('click', () => {
-            const dialog = new inputDialog();
-            const inputSection = new TextSection();
-            dialog.addChild(inputSection);
-            dialog.attachTo(dialogRoot);
-            dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
-            });
-            dialog.setOnSubmitListener(() => {
-                const image = new NoteComponent(inputSection.title, inputSection.body);
-                this.page.addChild(image);
-                dialog.removeFrom(dialogRoot);
-            });
-        });
-        const todoButton = document.querySelector("#add-Task");
-        todoButton.addEventListener('click', () => {
-            const dialog = new inputDialog();
-            const inputSection = new TextSection();
-            dialog.addChild(inputSection);
-            dialog.attachTo(dialogRoot);
-            dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
-            });
-            dialog.setOnSubmitListener(() => {
-                const todo = new TodoComponent(inputSection.title, inputSection.body);
+                const todo = makeSection(inputSection);
                 this.page.addChild(todo);
-                dialog.removeFrom(dialogRoot);
+                dialog.removeFrom(this.dialogRoot);
             });
         });
     }
