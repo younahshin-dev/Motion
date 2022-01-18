@@ -27,8 +27,14 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     closeButton.onclick = () => {
       this.closeListener && this.closeListener();
     }
+
+    const dragElement = this.element.querySelector(".page-item") as HTMLElement;
+    dragElement.ondragstart = (ev:DragEvent) => {
+      
+    }
   }
 
+ 
   addChild(child: Component): void {
     const container = this.element.querySelector(".page-item__body") as HTMLHtmlElement;
     child.attachTo(container);
