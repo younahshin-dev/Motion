@@ -18,7 +18,7 @@ class App {
   constructor(appRoot: HTMLElement, private dialogRoot: HTMLElement) {
     this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
-
+     
     this.bindElementToDialog<MediaSection>("#add-Image", MediaSection, (inputSection:MediaSection) => new ImageComponent(inputSection.title, inputSection.url));
    
     
@@ -29,7 +29,15 @@ class App {
 
     this.bindElementToDialog<TextSection>("#add-Task", TextSection, (inputSection:TextSection) => new TodoComponent(inputSection.title, inputSection.body));
     
-    
+     // For demo :)
+     this.page.addChild(new ImageComponent('Image Title', 'https://picsum.photos/800/400'));
+     this.page.addChild(new VideoComponent('Video Title', 'https://youtu.be/D7cwvvA7cP0'));
+     this.page.addChild(new NoteComponent('Note Title', "Don't forget to code your dream"));
+     this.page.addChild(new TodoComponent('Todo Title', 'TypeScript Course!'));
+     this.page.addChild(new ImageComponent('Image Title', 'https://picsum.photos/800/400'));
+     this.page.addChild(new VideoComponent('Video Title', 'https://youtu.be/D7cwvvA7cP0'));
+     this.page.addChild(new NoteComponent('Note Title', "Don't forget to code your dream"));
+     this.page.addChild(new TodoComponent('Todo Title', 'TypeScript Course!'));
   }
   private bindElementToDialog<T extends (MediaData | TextData) & Component> 
     (
