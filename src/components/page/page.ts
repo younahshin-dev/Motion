@@ -14,6 +14,7 @@ interface SectionContainer extends Component, Composable {
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
   muteChildren(state: 'mute' | 'unmute'): void;
   getBoundingClientRect(): DOMRect;
+  onDropped(): void;
 }
 
 type SectionContainerConstructor = {
@@ -74,18 +75,22 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
   }
 
   onDragStart(_: DragEvent) {
-    this.notifyDragObservers('start')
+    this.notifyDragObservers('start');
+    this.element.classList.add('lifted');
   }
   onDragEnd(_: DragEvent) {
-    this.notifyDragObservers('stop')
+    this.notifyDragObservers('stop');
+    this.element.classList.remove('lifted');
   }
 
   onDragEnter(_: DragEvent) {
-    this.notifyDragObservers('enter')
+    this.notifyDragObservers('enter');
+    this.element.classList.add('drop-area');
   }
 
   onDragLeave(_: DragEvent) {
-    this.notifyDragObservers('leave')
+    this.notifyDragObservers('leave');
+    this.element.classList.remove('drop-area');
   }
 
   notifyDragObservers(state:DragState): void{
@@ -94,6 +99,10 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
 
   getBoundingClientRect(): DOMRect {
     return this.element.getBoundingClientRect();
+  }
+
+  onDropped() {
+    this.element.classList.remove('drop-area');
   }
 }
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
@@ -121,8 +130,6 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
   onDrop(event: DragEvent) {
     event.preventDefault();
     //여기에서 위치를 바꿔주면 됨
-    console.log('onDrop');
-    console.log('this.dragTarget', this.dragTarget);
     
     if (!this.dropTarget) {
       return;
@@ -137,6 +144,7 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
       //beforeend 요소의 안에서 마지막 child의 뒤
       //afterend 요소의 다음
     }
+    this.dropTarget.onDropped();
   }
   addChild(section:Component) {
     const item = new this.pageItemConstructor();
