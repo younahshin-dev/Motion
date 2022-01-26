@@ -13,6 +13,7 @@ interface SectionContainer extends Component, Composable {
   setOnCloseListener(listener: OnCloseListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
   muteChildren(state: 'mute' | 'unmute'): void;
+  getBoundingClientRect(): DOMRect;
 }
 
 type SectionContainerConstructor = {
@@ -91,6 +92,9 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     this.dragStateListener && this.dragStateListener(this, state);
   }
 
+  getBoundingClientRect(): DOMRect {
+    return this.element.getBoundingClientRect();
+  }
 }
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
   private children = new Set<SectionContainer>(); // 페이지 아이템의 자식요소들을 알아야 drag & drop 시 자식요소에서 dragOver 가 발생하지 않게 처리 가능
@@ -117,12 +121,17 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
   onDrop(event: DragEvent) {
     event.preventDefault();
     //여기에서 위치를 바꿔주면 됨
-    if(!this.dropTarget) {
+    console.log('onDrop');
+    console.log('this.dragTarget', this.dragTarget);
+    
+    if (!this.dropTarget) {
       return;
     }
-    if(this.dragTarget && this.dragTarget !== this.dropTarget) {
+    if (this.dragTarget && this.dragTarget !== this.dropTarget) {
+      const dropY = event.clientY;
+      const srcElement = this.dragTarget.getBoundingClientRect(); 
       this.dragTarget.removeFrom(this.element); //this.element = page
-      this.dropTarget.attach(this.dragTarget, "beforebegin"); // 요소의 밖의 앞
+      this.dropTarget.attach(this.dragTarget, dropY > srcElement.y ?"afterend": "beforebegin"); // 요소의 밖의 앞
       //beforebegin 요소의 앞
       //afterbegin 요소의 안에서 첫번째 child의 앞
       //beforeend 요소의 안에서 마지막 child의 뒤
